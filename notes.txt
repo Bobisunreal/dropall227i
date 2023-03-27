@@ -1,0 +1,295 @@
+this is kinda a abomination, it is desinged mostly for free play coop
+everything it desinged to be used independently,but they will work more fluidly together.
+
+there is many mutators in here
+
+------------------------------------------
+dropall227i.adminlogin     (227i)
+-------------------------------------------
+this mutator adds a automatic admin login system,
+so as soon as you join , you are admin.
+it supports security tho uid or ip adress
+it checks ip in both 227 and 225 methods incase 227 ip bug happens.
+You need to add the players manually in the config.
+
+if 'databaseinterationclass' is present, it will try to link to it and never use it yet.
+
+player commands:
+'/help' - basicly just show it running.
+'/op'   - add users in game/console (*unfinshed function)
+
+it was tested in 
+ jcoopz1(ok) ,
+ xcoop needs gamerules suport added to work.
+  after patched, it supports adminlelevels.
+
+player info:
+var() config  array<PlayerData>  Admins;
+	var() config string PlayerName;
+	var() config string PlayerIp, uid ;
+	var() config bool enabled;
+        var() config int A_level;
+
+
+color to draw message in console :
+var() config color somecolor;
+
+
+
+-----------------------------------------------
+dropall227i.deco_mutator  (227i)
+-----------------------------------------------
+this mutator adds persitant custom decorations.
+things you SUMMON/SPAWN in game That are decorations.
+get saved and respawned the next time the level is loaded.
+
+it also supports saving instanthouse objects.
+it does not support spraycan yet, but it should be able to with changes.
+
+player commands:
+'/help'              - basic help.
+'/decosaver help'    - more help with
+'hagain'             - force a reload ( dont)
+'/decoaim'           - delete the object you are aiming at.(buggy),may need to /updatedeco first
+'/decorecallstatus'  - debug status
+'/decorecallpause'   - pause/resume the loading.
+'/updatedeco'        - refesh the saved data
+'/ownalldeco'        - recieve the output for debuging
+'/deletesession'     - unfinished 
+'/decorecallstep'    - unfinished ( step tho one object)
+'/decosetend'        - unfinished
+
+----------------------------------------------------
+dropall227i.giveitems
+----------------------------------------------------
+kinda broken giveitems mutator based on tkr work.
+
+
+----------------------------------------------------
+dropall227i.hitsoundsmh (227i)
+----------------------------------------------------
+port of hitsounds monster mh 
+
+pick your own sounds:
+var() config  string hitmarkersnd;
+var() config  string hitmarkersndteam;
+var() config  string hitmarkersndarmor;
+
+players can adjust the hit volume
+player commands:
+'/help'
+'/hitsounds'
+'/togglehitsounds'
+'/hitsoundsvolup'
+'/hitsoundsvoldown'
+
+
+----------------------------------------------------
+dropall227i.essentials
+----------------------------------------------------
+this is like the master mutator.
+i cant even tell you all the things this does anymore
+'essentials.help'            -show help
+
+the escapecode can be configured, but the commandlist assumes it is set to "/"
+'/goal <num>'        - set some kill goal to enable the ending (broken, jcoopz1)
+'/icread'            - read in data from icmutator custom monsters,if it running.
+'/icwrite'           - write out modified dat to icmutate
+'/icaddpackge <file>' -  add pawns from file to the iccustom array
+'/icreadinv'         - load randominventory list from icmutater
+'/dzreadpawns'       - read pawns from dzmapm ( in a struct tho)
+'/readpack'          - read out the summonable classes in a package
+'/superreadpack'
+'/summonpack <pawns,items,all>'       - summon all of one type of object from a package.    
+'/arbfuncaim'                         - bind a actor to arb
+'/arbfunc <functionname> <arguments>' - execute against arbaim actor          
+
+'/nicksrv'
+'/createlogin <password>'
+'/plogin <password>"
+'/mail'     - broken mailbox
+  markread
+  sendmail
+  showallmail
+
+'/god'
+'/fly'
+'/walk'
+'/ghost'
+
+'/supersummon'
+'/summon'
+'/spawnmass'
+
+'/words <text>' - draw some words
+'/butcher'
+'/keyit'
+'/advance'
+
+'/pawns'
+'/stats'
+'/getteleporters'
+'/getendteleporters'
+'/gr'
+'/killall'
+'/getmapspots'
+'/savespot'
+'/gotospot'
+'/viewspot'
+'/removespot'
+'/trace2'      - bind to and give variable property info about what you aiming at
+'/traceaim'    - bind to and give basic info about what you aiming at
+'/edittrace <property> <value>'   - edit a property of you taraget
+'/teltrace'
+'/removemutator'
+'/addmutator'
+'/enablemutator'
+'/getmutators'
+'/tpaccept'
+'/tpahere'
+'/tpdeny'
+'/tpa'
+'/tpyes'
+'/tp'
+'/endtoggle'
+
+----------------------------------------------------
+mcoop.essentials
+----------------------------------------------------
+honesty, this is usless as-is
+it requires jmdm.u
+its just a mutator that replaces the playerclasses in jcoopz1 based on the players name.
+its specifily for monsterplayers tho and helps jcoopz work with them.
+'/help'
+'/mcoop help'
+
+
+----------------------------------------------------
+sn_shit_mutator.essentials
+----------------------------------------------------
+this is a universal spawn - nofify based replacer.
+good for replacing blood or projectiles.
+
+    struct spawnnote  {// shit is now other shit
+    var() config string           thing;     // (name ) ie ... 'BloodBurst'
+    var() config string           newthing;' // (class) ie ... "unreali.ringexplosion2"
+    var() config bool             isenabled;
+
+commands;
+'/help'
+'/debugspawn' - listen for 8 seconds and show the last 15 actors that spawned.
+
+
+----------------------------------------------------
+dropall227i.toasty227
+----------------------------------------------------
+this is a very enhanched version of pcubes "toasty" mod
+
+var() config string Trigger;       trigger text
+var() config string PlaySnd;       sound to play
+var() config string namerelevant;}; player name optoinal
+
+triggertext:
+having a << >> in the triggerword start/end will dicate weather the trigger word is explicitly  the left/right
+having a ??? in the triggerword  indicates that it must have a "?" anywhere in the string to trigger off
+
+"<<text" only triggers if first 4 charaters are "test'.
+">>text" only triggers if last 4 are "test".
+"test" triggers anywhere.
+
+playsound:
+just one  sound            "file.sound" 
+multiple to pick randomly :"file.sound1,file.sound3,file.sound9,file.sound77"
+multiple it good for randomizing a laugh track or maybe a taunt. 
+
+namerelevent:
+specify here a playername, then this sound will only play for them chatting
+this lets everyone have there own personal set of sounds.
+
+extra style "vsay' edm style.
+vsay taunts are like the taunts in EDM , you can say a pharse such as LEFT< "eat t"  not instr
+it will play a matching sound if available , and replace your text with the full quote.
+such as  "eat t"  replace with "eat THat!". this replaces the entire chat string!
+var() config string textin;
+var() config string PlaySnd;
+var() config string textout;
+
+
+bforceserverpackages:
+on 227i + will auto add the sound files to server packages.
+
+'/help'
+'//pokepackage <package>' - see what in a package
+'/importtaunts <package>' - import entire package of sounds.
+'/toggletaunts'           - ignore sounds on the "client", they arent played, 
+                            but you may still be able to hear then standing nexct to a player.
+'/togglechatnotice'       - toggle a server customizable chat nofication sound
+'/taunts'                 - list avalible taunts
+
+
+----------------------------------------------------
+dropall227i.swapdropper
+----------------------------------------------------
+this is a drop-when -killed mutator
+but it uses 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
